@@ -36,7 +36,41 @@ for (item of symbols) {
 btnsWrapper.addEventListener('click', (e) => {
     console.log(e.target.textContent, calcprocess.textContent);
 
-    const userValue = e.target.textContent
+    // const userValue = e.target.textContent
+    setUserValue(e.target.textContent) 
+
+})
+
+document.addEventListener('keydown', (e) => {
+
+    // const userValue = e.key
+    setUserValue(e.key) 
+    // console.log(e.target.textContent, calcprocess.textContent);
+
+    // const userValue = e.target.textContent
+    // switch (userValue) {
+    //     case 'AC':
+    //         calcprocess.textContent = ''
+    //         calcresult.textContent = ''
+    //         break;
+    //     case 'C':
+    //         calcprocess.textContent = ''
+    //         break
+    //     case '<':
+    //         calcprocess.textContent = calcprocess.textContent.slice(0, calcprocess.textContent.length-1)
+    //         break
+    //     case '=':
+    //         calcresult.textContent = eval(calcprocess.textContent)
+    //         calcprocess.textContent = ''
+    //         break
+    //     default:
+    //         calcprocess.textContent += userValue
+    // }
+    console.log(e);
+})
+
+function setUserValue(userValue) {
+
     switch (userValue) {
         case 'AC':
             calcprocess.textContent = ''
@@ -52,8 +86,16 @@ btnsWrapper.addEventListener('click', (e) => {
             calcresult.textContent = eval(calcprocess.textContent)
             calcprocess.textContent = ''
             break
-        default:
-            calcprocess.textContent += userValue
+        // default:
+        //     calcprocess.textContent += userValue
     }
 
-})
+    const isSymbol = ['+', '-', '*', '/', '.'].some( item => item === userValue)
+
+    if (isFinite(userValue) || isSymbol) {
+        calcprocess.textContent += userValue
+        calcresult.textContent = eval(calcprocess.textContent)
+    }
+
+
+}
